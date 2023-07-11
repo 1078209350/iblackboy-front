@@ -1,11 +1,11 @@
 <template>
-  <div class="login-container">
+  <div class="register-container">
     <div>
       <img src="../../assets/img/logo.png" alt="">
     </div>
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+    <el-form ref="registerForm" :model="registerForm" :rules="registerRules" class="register-form" auto-complete="on" label-position="left">
       <div class="title-container">
-        <h3 class="title">登录</h3>
+        <h3 class="title">注册</h3>
       </div>
 
       <el-form-item prop="name">
@@ -14,7 +14,7 @@
         </span>
         <el-input
           ref="name"
-          v-model="loginForm.name"
+          v-model="registerForm.name"
           placeholder="Username"
           name="name"
           type="text"
@@ -30,28 +30,23 @@
         <el-input
           :key="passwordType"
           ref="password"
-          v-model="loginForm.password"
+          v-model="registerForm.password"
           :type="passwordType"
           placeholder="Password"
           name="password"
           tabindex="2"
           auto-complete="on"
-          @keyup.enter.native="handleLogin"
+          @keyup.enter.native="handleRegister"
         />
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
       <div class="to-register">
-        <span @click="handleRegister">没有账号？注册一个</span>
+        <span @click="handleLogin">已有账号？去登录</span>
       </div>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
-        <span style="margin-right:20px;">userName: guantong</span>
-        <span> password: 123456</span>
-      </div>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegister">Register</el-button>
 
     </el-form>
   </div>
@@ -78,11 +73,11 @@ export default {
       }
     }
     return {
-      loginForm: {
+      registerForm: {
         name: 'guantong',
         password: '123456'
       },
-      loginRules: {
+      registerRules: {
         // name: [{ required: true, trigger: 'blur', validator: validateUsername }],
         name: [{ required: true, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
@@ -112,13 +107,14 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+    handleRegister() {
+      this.$refs.registerForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then((res) => {
+          this.$store.dispatch('user/register', this.registerForm).then((res) => {
             console.log(res)
-            this.$router.push({ path: this.redirect || '/' })
+            debugger
+            this.$router.push({ path: '/login' })
             this.loading = false
           }).catch(() => {
             this.loading = false
@@ -129,8 +125,8 @@ export default {
         }
       })
     },
-    handleRegister () {
-      this.$router.push({ path: '/register' })
+    handleLogin () {
+      this.$router.push({ path: '/login' })
     }
   }
 }
@@ -145,13 +141,13 @@ $light_gray:#fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
-  .login-container .el-input input {
+  .register-container .el-input input {
     color: $cursor;
   }
 }
 
 /* reset element-ui css */
-.login-container {
+.register-container {
   .el-input {
     display: inline-block;
     height: 47px;
@@ -188,32 +184,20 @@ $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
-.login-container {
+.register-container {
   min-height: 100%;
   width: 100%;
   background: url("../../assets/img/login.png") no-repeat 100% 100%;
   background-size: cover;
   overflow: hidden;
 
-  .login-form {
+  .register-form {
     position: relative;
     width: 520px;
     max-width: 100%;
     padding: 0 35px;
     margin: 0 auto;
     overflow: hidden;
-  }
-
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
   }
 
   .svg-container {
