@@ -54,6 +54,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import {Message} from "element-ui";
 
 export default {
   name: 'Login',
@@ -74,8 +75,8 @@ export default {
     }
     return {
       registerForm: {
-        name: 'guantong',
-        password: '123456'
+        name: '',
+        password: ''
       },
       registerRules: {
         // name: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -112,11 +113,14 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/register', this.registerForm).then((res) => {
-            console.log(res)
             debugger
-            this.$router.push({ path: '/login' })
-            this.loading = false
-          }).catch(() => {
+            if (res.success) {
+              Message.success('注册成功')
+              this.$router.push({ path: '/login' })
+            }
+          }).catch((err) => {
+            Message.error(err)
+          }).finally(()=>{
             this.loading = false
           })
         } else {

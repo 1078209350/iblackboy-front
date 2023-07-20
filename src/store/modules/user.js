@@ -48,7 +48,7 @@ const actions = {
     const { name, password } = userInfo
     return new Promise((resolve, reject) => {
       register({ name: name.trim(), password: password }).then(response => {
-        resolve()
+        resolve(response)
       }).catch(error => {
         reject(error)
       })
