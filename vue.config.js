@@ -35,7 +35,7 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    },
+    }
     // proxy: {
     //   '/user': {
     //     target: 'http://121.37.190.193', // 接口的域名
