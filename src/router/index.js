@@ -74,6 +74,12 @@ export const constantRoutes = [
         meta: { title: '产品表格', icon: 'table' }
       },
       {
+        path: 'dict',
+        name: 'Dict',
+        component: () => import('@/views/dict/index'),
+        meta: { title: '数据字典', icon: 'table' }
+      },
+      {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
