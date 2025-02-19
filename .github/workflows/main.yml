@@ -3,8 +3,6 @@ name: Frontend CI/CD
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'iblack-front/**'  # 如果项目在仓库的子目录，按需调整路径
 
 jobs:
   deploy:
