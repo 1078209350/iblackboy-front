@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           port: ${{ secrets.SERVER_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "frontend/dist/*"
+          source: "./dist/*"
           target: ${{ secrets.FRONTEND_DEPLOY_PATH }}
 
       - name: Reload Nginx
