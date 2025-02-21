@@ -146,8 +146,8 @@ export default {
     fetchData(params) {
       this.listLoading = true
       getList({ page: this.currentPage, size: 10, ...params }).then(response => {
-        this.list = response.data.result.list
-        this.total = response.data.result.total
+        this.list = response.data
+        this.total = response.total
         this.listLoading = false
       })
     },
