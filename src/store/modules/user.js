@@ -30,9 +30,9 @@ const mutations = {
 const actions = {
   // 登录
   login({ commit }, userInfo) {
-    const { name, password } = userInfo
+    const { account, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ name: name.trim(), password: password }).then(response => {
+      login({ account: account.trim(), password: password }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
