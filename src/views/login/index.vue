@@ -8,15 +8,15 @@
         <h3 class="title">登录-道爷我成了</h3>
       </div>
 
-      <el-form-item prop="name">
+      <el-form-item prop="account">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
           ref="name"
-          v-model="loginForm.name"
+          v-model="loginForm.account"
           placeholder="Username"
-          name="name"
+          name="account"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -79,12 +79,12 @@ export default {
     }
     return {
       loginForm: {
-        name: 'guantong',
+        account: 'guantong',
         password: '123456'
       },
       loginRules: {
         // name: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        name: [{ required: true, trigger: 'blur' }],
+        account: [{ required: true, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
