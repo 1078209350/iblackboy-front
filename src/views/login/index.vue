@@ -50,7 +50,7 @@
 
       <div class="tips">
         <span style="margin-right:20px;">userName: guantong</span>
-        <span> password: 123456</span>
+        <span> password: 最古老的密码</span>
       </div>
 
     </el-form>
@@ -59,6 +59,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import md5 from 'js-md5'
 
 export default {
   name: 'Login',
@@ -80,7 +81,7 @@ export default {
     return {
       loginForm: {
         account: 'guantong',
-        password: '123456'
+        password: ''
       },
       loginRules: {
         // name: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -116,6 +117,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.loginForm.password = md5(`ym${this.loginForm.password}`)
           this.$store.dispatch('user/login', this.loginForm).then((res) => {
             console.log(res)
             this.$router.push({ path: this.redirect || '/' })
